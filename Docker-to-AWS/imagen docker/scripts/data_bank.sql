@@ -30,12 +30,12 @@ create table num_submitted(
 );
 
 INSERT INTO num_submitted(submitted_via,cantidad) VALUES
-('Email',408),
-('Fax',20281),
-('Phone',88128),
-('Postal mail',72427),
-('Referral',186840),
-('Web',1103682);
+	('Email',408),
+	('Fax',20281),
+	('Phone',88128),
+	('Postal mail',72427),
+	('Referral',186840),
+	('Web',1103682);
 
 create table num_anio(
 	anio VARCHAR(250),
@@ -43,11 +43,11 @@ create table num_anio(
 );
 
 INSERT INTO num_anio(anio,cantidad) VALUES
-('2011', 2536),
-('2012', 72373),
-('2013', 108217),
-('2014', 153044),
-('2015', 168475);
+	('2011', 2536),
+	('2012', 72373),
+	('2013', 108217),
+	('2014', 153044),
+	('2015', 168475);
 
 create table num_issue(
 	issue VARCHAR(250),
@@ -221,3 +221,247 @@ INSERT INTO num_issue(issue,cantidad) VALUES
 	 ('Was approved for a loan, but didn''t receive the money',109),
 	 ('Written notification about debt',29786),
 	 ('Wrong amount charged or received',585);
+
+
+create table complaints_max_per_product_issue(
+	product VARCHAR(100),
+	issue VARCHAR(200),
+	count integer
+);
+
+INSERT INTO complaints_max_per_product_issue (product,issue,count) VALUES
+	 ('Vehicle loan or lease','Managing the loan or lease',5381),
+	 ('Student loan','Dealing with my lender or servicer',17630),
+	 ('Prepaid card','Unauthorized transactions/trans. issues',1325),
+	 ('Payday loan, title loan, or personal loan','Charged fees or interest you didn''t expect',3126),
+	 ('Other financial service','Fraud or scam',379),
+	 ('Mortgage','Loan modification,collection,foreclosure',112309),
+	 ('Money transfer, virtual currency, or money service','Fraud or scam',5987),
+	 ('Debt collection','Cont''d attempts collect debt not owed',60682),
+	 ('Credit reporting, credit repair services, or other personal consumer reports','Incorrect information on your report',191833),
+	 ('Credit card or prepaid card','Problem with a purchase shown on your statement',15768),
+	 ('Consumer Loan','Managing the loan or lease',15283),
+	 ('Checking or savings account','Managing an account',34895),
+	 ('Bank account or service','Account opening, closing, or management',37961);
+
+create table complaints_per_100k_state(
+	state VARCHAR(4),
+	complaint_count integer,
+	full_name VARCHAR(50),
+	population integer,
+	complaints_per_100k VARCHAR(50)
+);
+
+INSERT INTO complaints_per_100k_state (state,complaint_count,full_name,population,complaints_per_100k) VALUES
+	 ('AK',1531,'Alaska',732673,208.96),
+	 ('AL',17401,'Alabama',5074300,342.92),
+	 ('AR',7150,'Arkansas',3045640,234.76),
+	 ('AZ',30622,'Arizona',7359200,416.11),
+	 ('CA',199148,'California',39029300,510.25),
+	 ('CO',22917,'Colorado',5839930,392.42),
+	 ('CT',16089,'Connecticut',3626210,443.69),
+	 ('DE',6929,'Delaware',1018400,680.38),
+	 ('FL',150693,'Florida',22244800,677.43),
+	 ('GA',78458,'Georgia',10912900,718.95),
+	 ('HI',4456,'Hawá',1441553,309.11),
+	 ('IA',5632,'Iowa',3200520,175.97),
+	 ('ID',4309,'Idaho',1939030,222.22),
+	 ('IL',56426,'Illinois',12582000,448.47),
+	 ('IN',16218,'Indiana',6833040,237.35),
+	 ('KS',6961,'Kansas',2937150,237.0),
+	 ('KY',10005,'Kentucky',4512310,221.73),
+	 ('LA',18192,'Luisiana',4590240,396.32),
+	 ('MA',25579,'Massachusetts',6981970,366.36),
+	 ('MD',40484,'Maryland',6164660,656.71),
+	 ('ME',3883,'Maine',1385340,280.29),
+	 ('MI',34102,'Míchiga',10034100,339.86),
+	 ('MN',15026,'Minnesota',5717180,262.82),
+	 ('MO',20971,'Misuri',6177960,339.45),
+	 ('MS',8485,'Misisipi',2940060,288.6),
+	 ('MT',2236,'Montana',1122870,199.13),
+	 ('NC',45388,'Carolina del Norte',10699000,424.23),
+	 ('ND',1383,'Dakota del Norte',779261,177.48),
+	 ('NE',3975,'Nebraska',1967920,201.99),
+	 ('NH',5232,'Nuevo Hampshire',1395230,374.99),
+	 ('NJ',53688,'Nueva Jersey',9261700,579.68),
+	 ('NM',6239,'Nuevo Méxic',2113340,295.22),
+	 ('NV',19236,'Nevada',3177770,605.33),
+	 ('NY',100533,'Nueva York',19677200,510.91),
+	 ('OH',43494,'Ohio',11756100,369.97),
+	 ('OK',9027,'Oklahoma',4019800,224.56),
+	 ('OR',14276,'Oregó',4240140,336.69),
+	 ('PA',50340,'Pensilvania',12972000,388.07),
+	 ('RI',4147,'Rhode Island',1093730,379.16),
+	 ('SC',22641,'Carolina del Sur',5282630,428.59),
+	 ('SD',1691,'Dakota del Sur',909824,185.86),
+	 ('TN',24249,'Tennessee',7051340,343.89),
+	 ('TX',124985,'Texas',30029600,416.21),
+	 ('UT',9730,'Utah',3380800,287.8),
+	 ('VA',41649,'Virginia',8683620,479.63),
+	 ('VT',1834,'Vermont',647064,283.43),
+	 ('WA',27129,'Washington',7785790,348.44),
+	 ('WI',14715,'Wisconsin',5892540,249.72),
+	 ('WV',3379,'Virginia Occidental',1775160,190.35),
+	 ('WY',1340,'Wyoming',581381,230.49);
+
+
+create table complaints_per_channel(
+	channel VARCHAR(20),
+	count integer
+);
+
+INSERT INTO complaints_per_channel (channel,count) VALUES
+	 ('Email',408),
+	 ('Fax',20281),
+	 ('Phone',88128),
+	 ('Postal mail',72427),
+	 ('Referral',186840),
+	 ('Web',1103682);
+
+
+create table complaints_per_product(
+	product VARCHAR(100),
+	count integer
+);
+
+INSERT INTO complaints_per_product (product,count) VALUES
+	 ('Bank account or service',86206),
+	 ('Checking or savings account',55452),
+	 ('Consumer Loan',31604),
+	 ('Credit card or prepaid card',154460),
+	 ('Credit reporting, credit repair services, or other personal consumer reports',463249),
+	 ('Debt collection',275584),
+	 ('Money transfer, virtual currency, or money service',19114),
+	 ('Mortgage',293191),
+	 ('Other financial service',1059),
+	 ('Payday loan, title loan, or personal loan',17150),
+	 ('Prepaid card',3819),
+	 ('Student loan',55838),
+	 ('Vehicle loan or lease',15040);
+
+
+create table complaints_per_year(
+	product VARCHAR(20),
+	count integer
+);
+
+INSERT INTO complaints_per_year(product, count) VALUES
+	('2011', 2536),
+	('2012', 72373),
+	('2013', 108217),
+	('2014', 153044),
+	('2015', 168475),
+	('2016', 191470),
+	('2017', 242967),
+	('2018', 257333),
+	('2019', 274770),
+	('2020', 581);
+
+
+create table top_words_all_complaints(
+	word VARCHAR(100),
+	count integer
+);
+
+INSERT INTO top_words_all_complaints (word,count) VALUES
+	 ('credit',755909),
+	 ('account',627359),
+	 ('report',328030),
+	 ('would',318524),
+	 ('payment',313602),
+	 ('information',312089),
+	 ('loan',298666),
+	 ('debt',257649),
+	 ('bank',248092),
+	 ('told',242916),
+	 ('received',228203),
+	 ('company',224459),
+	 ('time',205307),
+	 ('card',204246),
+	 ('called',199836),
+	 ('never',190898),
+	 ('payments',181854),
+	 ('sent',178563),
+	 ('reporting',178148),
+	 ('letter',169902);
+
+create table top_words_credit_reporting(
+	word VARCHAR(100),
+	count integer
+);
+
+INSERT INTO top_words_credit_reporting (word,count) VALUES
+	 ('credit',333881),
+	 ('report',178597),
+	 ('account',165365),
+	 ('information',142055),
+	 ('reporting',111871),
+	 ('consumer',71514),
+	 ('accounts',69801),
+	 ('equifax',51745),
+	 ('company',50748),
+	 ('payment',47058),
+	 ('removed',43631),
+	 ('would',43371),
+	 ('file',42418),
+	 ('late',42179),
+	 ('never',41951),
+	 ('debt',41679),
+	 ('sent',41096),
+	 ('inquiry',40649),
+	 ('dispute',40425),
+	 ('please',39924);
+
+create table top_words_debt_collection(
+	word VARCHAR(100),
+	count integer
+);
+
+INSERT INTO top_words_debt_collection (word,count) VALUES
+	 ('debt',175302),
+	 ('credit',132352),
+	 ('account',105661),
+	 ('collection',72452),
+	 ('company',71763),
+	 ('report',60056),
+	 ('received',54367),
+	 ('information',54071),
+	 ('would',51220),
+	 ('call',47027),
+	 ('letter',46340),
+	 ('called',45880),
+	 ('told',44451),
+	 ('never',44231),
+	 ('phone',42662),
+	 ('sent',42356),
+	 ('number',38395),
+	 ('pay',36745),
+	 ('payment',34799),
+	 ('amount',33931);
+
+create table top_words_mortgage(
+	word VARCHAR(100),
+	count integer
+);
+
+INSERT INTO top_words_mortgage (word,count) VALUES
+	 ('loan',131858),
+	 ('mortgage',128688),
+	 ('payment',93305),
+	 ('would',72087),
+	 ('home',61414),
+	 ('payments',55117),
+	 ('bank',51520),
+	 ('told',51437),
+	 ('received',49020),
+	 ('account',47981),
+	 ('time',46534),
+	 ('modification',43658),
+	 ('company',38687),
+	 ('us',37739),
+	 ('sent',37558),
+	 ('get',36474),
+	 ('pay',35270),
+	 ('property',34511),
+	 ('letter',34505),
+	 ('called',34153);

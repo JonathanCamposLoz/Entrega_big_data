@@ -1,16 +1,25 @@
 #libraries
 import dash
+from flask import Flask
 from dash import Dash, html, dcc
 import dash_bootstrap_components as dbc
 
 
 #from callbacks import register_callbacks
+server = Flask(__name__)
 
 request_path_prefix = None
 #app = dash.Dash(__name__, requests_pathname_prefix=request_path_prefix, external_stylesheets=[dbc.themes.FLATLY],)
     
 # Dash instance declaration
-app = Dash(__name__, use_pages=True, external_stylesheets=[dbc.themes.FLATLY])
+
+app = Dash(
+    __name__,
+    server=server,
+    pages_folder="app/pages",
+    use_pages=True,
+    external_stylesheets=[dbc.themes.FLATLY]
+)
 
 #Top menu, items get from all pages registered with plugin.pages
 navbar = dbc.NavbarSimple([
@@ -26,8 +35,8 @@ navbar = dbc.NavbarSimple([
         nav=True,
         label="Data Science",
     ),
-    dbc.NavItem(dbc.NavLink("Nosotros", "/nosotros")),
     ],
+
     brand="Presentación Trabajo Final - Big Data",
     color="primary",
     dark=True,
@@ -43,9 +52,6 @@ app.layout = dbc.Container(
     className="dbc",
     fluid=True,
 )
-
-# Call to external function to register all callbacks
-#register_callbacks(app)
 
 
 # This call will be used with Gunicorn server

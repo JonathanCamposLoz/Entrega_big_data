@@ -30,6 +30,15 @@ import traceback
 @task
 def lectura_quejas():
     complaint_dataset = pd.read_csv("Datasets/complaint_data.csv")
+
+    complaint_dataset["Product"] = complaint_dataset["Product"].replace( {"Credit card":"Credit card or prepaid card",
+                                        "Credit reporting":"Credit reporting, credit repair services, or other personal consumer reports",
+                                        "Money transfers":"Money transfer, virtual currency, or money service",
+                                        "Payday loan":"Payday loan, title loan, or personal loan",
+                                        "Virtual currency":"Money transfer, virtual currency, or money service",
+                                        "Prepaid card":"Credit card or prepaid card"
+                                        } )
+
     return complaint_dataset
 
 @task
@@ -54,13 +63,6 @@ def conectar_a_base():
 def generar_por_producto(complaint_dataset, connAlchemy_aws):
 
     per_product = complaint_dataset[["Complaint ID","Product"]]
-
-    per_product = per_product.replace( {"Credit card":"Credit card or prepaid card",
-                                        "Credit reporting":"Credit reporting, credit repair services, or other personal consumer reports",
-                                        "Money transfers":"Money transfer, virtual currency, or money service",
-                                        "Payday loan":"Payday loan, title loan, or personal loan",
-                                        "Virtual currency":"Money transfer, virtual currency, or money service"
-                                        } )
 
     per_product = per_product.groupby(["Product"], as_index=False).count()
 
@@ -109,14 +111,6 @@ def generar_por_producto(complaint_dataset, connAlchemy_aws):
 def generar_por_issue(complaint_dataset, connAlchemy_aws):
 
     per_product_issue = complaint_dataset[["Complaint ID","Product","Issue"]]
-    
-    # Agrupar los problemas similares
-    per_product_issue = per_product_issue.replace( {"Credit card":"Credit card or prepaid card",
-                                        "Credit reporting":"Credit reporting, credit repair services, or other personal consumer reports",
-                                        "Money transfers":"Money transfer, virtual currency, or money service",
-                                        "Payday loan":"Payday loan, title loan, or personal loan",
-                                        "Virtual currency":"Money transfer, virtual currency, or money service"
-                                        } )
 
     per_product_issue = per_product_issue.groupby(["Product","Issue"], as_index=False).count()
 

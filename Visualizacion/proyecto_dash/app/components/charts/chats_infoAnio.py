@@ -1,10 +1,10 @@
 import plotly.express as px
 from dash import html , dcc
 
-from data.data_contector import Conector_db
+from app.data.data_contector import Conector_db
 
 
-class charts_bank():
+class charts_infAnio():
 
     def __init__(self,map_title:str,ID:str):
         self.con = Conector_db()

@@ -39,11 +39,12 @@ def lectura_info_estado():
 
 @task
 def conectar_a_base():
-    host_aws = "localhost"
+
+    host_aws = "database-1.cdxv193qnk1p.us-east-1.rds.amazonaws.com"
     port_aws = '5432'
-    user_aws = 'user'
-    password_aws = 'password'
-    database_aws = 'data_bank'
+    user_aws = 'postgres'
+    password_aws = 'postgres'
+    database_aws = 'data_bank' #verificar la existencia de la base datos
 
     connAlchemy_aws = create_engine(f'postgresql://{user_aws}:{password_aws}@{host_aws}:{port_aws}/{database_aws}')
 
@@ -191,10 +192,10 @@ def generar_por_estado(complaint_dataset, state_population_dataset, connAlchemy_
         complaint_count = Column(Integer)
         full_name = Column(String(50))
         population = Column(Integer)
-        complains_per_100k = Column(Float)
+        complaints_per_100k = Column(Float)
 
         def __repr__(self):
-            return f"complaints_per_100k_state(state={self.state!r}, complaint_count={self.complaint_count!r}), full_name={self.full_name!r}, population={self.population!r}), complains_per_100k={self.complains_per_100k!r})"
+            return f"complaints_per_100k_state(state={self.state!r}, complaint_count={self.complaint_count!r}), full_name={self.full_name!r}, population={self.population!r}), complaints_per_100k={self.complains_per_100k!r})"
         
     Base.metadata.create_all(connAlchemy_aws)
 
@@ -211,7 +212,7 @@ def generar_por_estado(complaint_dataset, state_population_dataset, connAlchemy_
                 complaint_count = item[1],
                 full_name = item[2],
                 population = item[3],
-                complains_per_100k = item[4]
+                complaints_per_100k = item[4]
                 )
 
                 to_commit_list.append(commit_item)

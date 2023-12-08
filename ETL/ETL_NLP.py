@@ -36,6 +36,13 @@ def lectura_quejas():
 
     complaint_dataset = complaint_dataset[complaint_dataset['Consumer complaint narrative'].notnull()]
 
+    complaint_dataset["Product"] = complaint_dataset["Product"].replace( {"Credit card":"Credit card or prepaid card",
+                                        "Credit reporting":"Credit reporting, credit repair services, or other personal consumer reports",
+                                        "Money transfers":"Money transfer, virtual currency, or money service",
+                                        "Payday loan":"Payday loan, title loan, or personal loan",
+                                        "Virtual currency":"Money transfer, virtual currency, or money service"
+                                        } )
+
     return complaint_dataset
 
 @task

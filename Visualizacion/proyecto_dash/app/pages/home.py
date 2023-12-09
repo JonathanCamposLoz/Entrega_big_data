@@ -11,11 +11,13 @@ from app.components.charts.map_complaints import map_complaints
 from app.components.charts.complaints_per_channel import complaints_per_channel
 from app.components.charts.complaints_per_product import complaints_per_product
 from app.components.charts.top_words_mortgage import top_words_mortgage
+from app.components.charts.top_words_all_complaints import top_words_all_complaints
+
 
 kpi1 = kpibadge("1'471.766", 'Total Base', 'Approved')
 kpi2 = kpibadge('18', 'Numero de Variables', 'Approved')
-kpi3 = kpibadge('325', 'Total transacciones', 'Approved')
-kpi4 = kpibadge('2122','Total User', 'Danger')
+kpi3 = kpibadge('18', 'Total Productos', 'Approved')
+kpi4 = kpibadge('6','Total Canales', 'Danger')
 
 
 chart_anio = charts_infAnio('Quejas por Años','id_1')
@@ -24,6 +26,7 @@ map_complaints = map_complaints('Quejas por cada 1000 habitantes','id_3')
 complaints_per_channel = complaints_per_channel('Quejas por canal','id_4')
 complaints_per_product = complaints_per_product('Quejas por producto','id_5')
 top_words_mortgage = top_words_mortgage('Nube de palabras','id_5')
+top_words_all_complaints = top_words_all_complaints('Nube de palabras 2','id_6')
 
 
 layout=  dbc.Container(
@@ -66,15 +69,7 @@ layout=  dbc.Container(
                     charts_TableProduccIssu.display()                    
                 ], xs=12, className='card'
                 )           
-            ]),
-            dbc.Row([
-                dbc.Col([
-                    top_words_mortgage.display()  
-                ], xs=12, className='card'
-                )           
-            ]),
-
-
+            ])
 
         ]
     )   

@@ -3,6 +3,9 @@ from dash import html , dcc
 
 from app.data.data_contector import Conector_db
 
+import pandas as pd
+
+import os
 
 class complaints_per_product():
 
@@ -13,8 +16,9 @@ class complaints_per_product():
 
     @staticmethod
     def chart():
-        con = Conector_db()
-        df = con.complaints_per_product()
+        script_dir = os.path.dirname(__file__)  # Ruta del directorio del script actual
+        file_path = os.path.join(script_dir, 'files/complaints_per_product.csv')
+        df = pd.read_csv(file_path)
         fig = px.bar(df, y='product', x='count', orientation='h', title='Horizontal Bar Chart',
                     labels={'count': 'Count', 'product': 'Product'})
         return fig

@@ -1,13 +1,7 @@
 version: '3'
 services:
-  web:
-    build:
-      context: .
+  my_app:
+    image: 3141618/dashboard_bigdata:v1
     ports:
       - "8050:8050"
-    depends_on:
-      - database
-  database:
-    image: 3141618/data_trabajo:v2
-    volumes:
-      - ./database:/path/to/database  # Ajusta la ruta según la ubicación real de tu base de datos
+

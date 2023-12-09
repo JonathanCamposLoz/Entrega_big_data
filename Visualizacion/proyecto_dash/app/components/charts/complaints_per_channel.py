@@ -3,6 +3,9 @@ from dash import html , dcc
 
 from app.data.data_contector import Conector_db
 
+import pandas as pd
+
+import os
 
 class complaints_per_channel():
 
@@ -13,8 +16,9 @@ class complaints_per_channel():
 
     @staticmethod
     def chart():
-        con = Conector_db()
-        df = con.chart_complaints_per_channel()
+        script_dir = os.path.dirname(__file__)  # Ruta del directorio del script actual
+        file_path = os.path.join(script_dir, 'files/complaints_per_channel.csv')
+        df = pd.read_csv(file_path)
         fig = px.pie(df, values='count', names='channel', title='Population of European continent')
         return fig
 

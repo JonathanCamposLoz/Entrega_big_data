@@ -3,7 +3,7 @@ import dash
 from flask import Flask
 from dash import Dash, html, dcc
 import dash_bootstrap_components as dbc
-
+import os
 
 #from callbacks import register_callbacks
 server = Flask(__name__)
@@ -21,6 +21,10 @@ app = Dash(
     external_stylesheets=[dbc.themes.FLATLY]
 )
 
+script_dir = os.path.dirname(__file__)  # Ruta del directorio del script actual
+img_rute = os.path.join(script_dir, 'app/assets/Unisabana.png')
+
+
 #Top menu, items get from all pages registered with plugin.pages
 navbar = dbc.NavbarSimple([
 
@@ -37,7 +41,9 @@ navbar = dbc.NavbarSimple([
     ),
     ],
 
-    brand="Presentación Trabajo Final - Big Data",
+    brand=[
+    html.Img(src='./app/assets/Unisabana.png', height="30px"),
+    "Presentación Trabajo Final - Big Data"], 
     color="primary",
     dark=True,
     className="mb-2",
@@ -56,7 +62,7 @@ app.layout = dbc.Container(
 
 # This call will be used with Gunicorn server
 server = app.server
-
+app.scripts.config.serve_locally = True
 # Testing server, don't use in production, host
 if __name__ == "__main__":
     app.run_server(host='0.0.0.0', port=8050, debug=True)

@@ -2,7 +2,9 @@ import plotly.express as px
 from dash import html , dcc
 
 from app.data.data_contector import Conector_db
+import pandas as pd
 
+import os
 
 class charts_infAnio():
 
@@ -13,8 +15,9 @@ class charts_infAnio():
 
     @staticmethod
     def chart_anio():
-        con = Conector_db()
-        df = con.info_anio()
+        script_dir = os.path.dirname(__file__)  # Ruta del directorio del script actual
+        file_path = os.path.join(script_dir, 'files/num_anio.csv')
+        df = pd.read_csv(file_path)
         fig = px.bar(df, x='anio', y='cantidad')
         return fig
 

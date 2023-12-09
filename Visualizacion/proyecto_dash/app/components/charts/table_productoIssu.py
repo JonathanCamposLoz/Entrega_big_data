@@ -2,7 +2,9 @@ import plotly.graph_objects as go
 from dash import html , dcc
 
 from app.data.data_contector import Conector_db
+import pandas as pd
 
+import os
 
 class charts_TableProduccIssu():
 
@@ -13,8 +15,9 @@ class charts_TableProduccIssu():
 
     @staticmethod
     def chart():
-        con = Conector_db()
-        df = con.table_productIssu()
+        script_dir = os.path.dirname(__file__)  # Ruta del directorio del script actual
+        file_path = os.path.join(script_dir, 'files/complaints_max_per_product_issue.csv')
+        df = pd.read_csv(file_path)
         columns = df.columns
         values = [df[col].tolist() for col in columns]
 

@@ -8,10 +8,11 @@ from wordcloud import WordCloud
 import matplotlib.pyplot as plt
 from io import BytesIO
 import base64
-import os
 import pandas as pd
 
-class top_words_mortgage():
+import os
+
+class top_words_all_complaints():
 
     def __init__(self,map_title:str,ID:str):
         self.con = Conector_db()
@@ -21,7 +22,7 @@ class top_words_mortgage():
     @staticmethod
     def chart():
         script_dir = os.path.dirname(__file__)  # Ruta del directorio del script actual
-        file_path = os.path.join(script_dir, 'files/top_words_mortgage.csv')
+        file_path = os.path.join(script_dir, 'files/top_words_all_complaints.csv')
         df = pd.read_csv(file_path)
         wordcloud = WordCloud(width=800, height=400, background_color='white').generate_from_frequencies(dict(zip(df['word'], df['count'])))
 

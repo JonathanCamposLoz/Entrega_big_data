@@ -3,6 +3,9 @@ from dash import html , dcc
 
 from app.data.data_contector import Conector_db
 
+import pandas as pd
+
+import os
 
 class map_complaints():
 
@@ -13,8 +16,9 @@ class map_complaints():
 
     @staticmethod
     def chart():
-        con = Conector_db()
-        df = con.map_complaints()
+        script_dir = os.path.dirname(__file__)  # Ruta del directorio del script actual
+        file_path = os.path.join(script_dir, 'files/complaints_per_100k_state.csv')
+        df = pd.read_csv(file_path)
         fig = px.choropleth(df, 
                             locations='state',  # Columna que contiene los códigos de los estados
                             locationmode='USA-states',  # Modo de ubicación para estados de EE. UU.
